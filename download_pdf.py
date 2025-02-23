@@ -69,4 +69,4 @@ driver.quit()
 
 # Calculate Total Time Taken for The Process
 end_time= time.time()
-print(f"Total Time taken to Save {n} Files is {int(end_time-check_time)} seconds")
+print(f"Total Time taken to Save {n} Files is {int(end_time-calc_time)} seconds")
