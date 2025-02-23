@@ -54,3 +54,13 @@ for i in range(1, n + 1):
     if i < n:
         driver.refresh()
         refresh_count += 1  
+        
+    # Rate limiting logic
+    if refresh_count >= 2:
+        elapsed_time = time.time() - start_time
+        if elapsed_time < 30:
+            time.sleep(30 - elapsed_time)  
+        refresh_count = 0  
+        start_time = time.time()  
+
+driver.quit()
