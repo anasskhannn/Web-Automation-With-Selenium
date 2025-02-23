@@ -1,3 +1,4 @@
+# Importing Libraries
 from selenium import webdriver
 from selenium.webdriver.chrome.service import Service
 import time
@@ -19,3 +20,10 @@ brave_options.add_argument("--disable-gpu")
 # Initialize WebDriver
 service = Service(chromedriver_path)
 driver = webdriver.Chrome(service=service, options=brave_options)
+
+# User input
+n = int(input("How many pages to print: "))
+
+# Rate limiting variables
+refresh_count = 0
+start_time = time.time()
