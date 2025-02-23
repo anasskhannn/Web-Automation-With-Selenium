@@ -27,3 +27,30 @@ n = int(input("How many pages to print: "))
 # Rate limiting variables
 refresh_count = 0
 start_time = time.time()
+
+for i in range(1, n + 1):
+    # This is my project https://github.com/anasskhannn/Daily-Reflection-Journal
+    driver.get("https://daily-reflection-journal.netlify.app/book")
+    time.sleep(2)  
+
+    # Print page to PDF
+    pdf_path = os.path.join(output_folder, f"{i}.pdf")
+    print_params = {
+        "landscape": False,
+        "displayHeaderFooter": False,
+        "printBackground": True,
+        "preferCSSPageSize": True,
+    }
+    
+    pdf_data = driver.execute_cdp_cmd("Page.printToPDF", print_params)["data"]
+    pdf_bytes = base64.b64decode(pdf_data)  
+
+    with open(pdf_path, "wb") as f:
+        f.write(pdf_bytes)
+
+    print(f"Saved: {pdf_path}")
+
+    # Refresh the page (if not last iteration)
+    if i < n:
+        driver.refresh()
+        refresh_count += 1  
